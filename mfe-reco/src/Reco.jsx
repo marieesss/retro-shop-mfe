@@ -39,6 +39,20 @@ const Reco = () => {
     };
   }, []);
 
+
+    const handleAddToCart = (product) => {
+      // Le contrat exact exigé par la Phase 1
+      const payload = {
+        id: String(product.id),
+        title: product.title,
+        price: Number(product.price),
+        image: product.image,
+        platform: product.platform
+      };
+      console.log(" Bouton cliqué ! Envoi du payload :", payload);
+      emit("cart:add", payload);
+    };
+
   return (
     <div className="reco-zone">
       {/* Insère ici le JSX qui était déjà préparé */}
@@ -48,6 +62,7 @@ const Reco = () => {
           <div key={item.id} style={{ border: '1px solid gray', padding: '10px' }}>
             <h4>{item.title}</h4> {/* Le contrat dit "title", pas "name" */}
             <p>{item.price} €</p>
+            <button onClick={() => handleAddToCart(item)}>Ajouter au panier</button>
           </div>
         ))}
       </div>
