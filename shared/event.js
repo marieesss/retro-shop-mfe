@@ -1,18 +1,19 @@
-const listeners = {};
-
 export function emit(eventName, payload) {
-  if (!listeners[eventName]) return;
-  listeners[eventName].forEach((handler) => handler(payload));
+  window.dispatchEvent(
+    new CustomEvent(eventName, {
+      detail: payload,
+    })
+  );
 }
 
 export function on(eventName, handler) {
-  if (!listeners[eventName]) {
-    listeners[eventName] = [];
-  }
+  const listener = (event) => {
+    handler(event.detail);
+  };
 
-  listeners[eventName].push(handler);
+  window.addEventListener(eventName, listener);
 
   return () => {
-    listeners[eventName] = listeners[eventName].filter((h) => h !== handler);
+    window.removeEventListener(eventName, listener);
   };
 }

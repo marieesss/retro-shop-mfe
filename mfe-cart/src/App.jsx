@@ -72,13 +72,13 @@ export default function App() {
         <p>Votre panier est vide.</p>
       ) : (
         <>
-          <ul style={{ listStyle: "none", padding: 0 }}>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {items.map((item) => (
               <li
                 key={item.id}
                 style={{
                   borderBottom: "1px solid #ddd",
-                  padding: "8px 0",
+                  padding: "10px 0",
                 }}
               >
                 <div><strong>{item.title}</strong></div>
