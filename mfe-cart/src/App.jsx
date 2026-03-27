@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { emit, on } from '../../shared/event';
+import React, { useEffect, useMemo, useState } from "react";
+import { emit, on } from "../../shared/event";
 
 export default function App() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = on('cart:add', (product) => {
+    const unsubscribe = on("cart:add", (product) => {
       setItems((prevItems) => {
         const existingItem = prevItems.find((item) => item.id === product.id);
 
@@ -27,7 +27,7 @@ export default function App() {
           0
         );
 
-        emit('cart:updated', {
+        emit("cart:updated", {
           items: nextItems,
           count,
           total,
@@ -55,9 +55,9 @@ export default function App() {
   const handleClearCart = () => {
     setItems([]);
 
-    emit('cart:clear', {});
+    emit("cart:clear", {});
 
-    emit('cart:updated', {
+    emit("cart:updated", {
       items: [],
       count: 0,
       total: 0,
@@ -65,36 +65,40 @@ export default function App() {
   };
 
   return (
-    <aside className="cart">
+    <div>
       <h2>Panier</h2>
 
       {items.length === 0 ? (
         <p>Votre panier est vide.</p>
       ) : (
         <>
-          <ul>
+          <ul style={{ listStyle: "none", padding: 0 }}>
             {items.map((item) => (
-              <li key={item.id}>
-                <strong>{item.title}</strong>
-                <div>Plateforme : {item.platform || 'N/A'}</div>
-                <div>Prix : {item.price} €</div>
+              <li
+                key={item.id}
+                style={{
+                  borderBottom: "1px solid #ddd",
+                  padding: "8px 0",
+                }}
+              >
+                <div><strong>{item.title}</strong></div>
+                <div>Plateforme : {item.platform || "-"}</div>
+                <div>Prix : {item.price.toFixed(2)} €</div>
                 <div>Quantité : {item.quantity}</div>
               </li>
             ))}
           </ul>
 
-          <hr />
+          <div style={{ marginTop: "12px" }}>
+            <div><strong>Articles :</strong> {count}</div>
+            <div><strong>Total :</strong> {total.toFixed(2)} €</div>
+          </div>
 
-          <p>
-            <strong>Articles :</strong> {count}
-          </p>
-          <p>
-            <strong>Total :</strong> {total.toFixed(2)} €
-          </p>
-
-          <button onClick={handleClearCart}>Vider</button>
+          <button onClick={handleClearCart} style={{ marginTop: "12px" }}>
+            Vider
+          </button>
         </>
       )}
-    </aside>
+    </div>
   );
 }
