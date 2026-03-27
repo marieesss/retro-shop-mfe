@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { on, off } from '../../shared/event'; 
-import { products } from '../../shared/product';
-
+import products from '../../shared/product';
+import { emit, on } from '../../shared/event';
 const Reco = () => {
   const [recommendations, setRecommendations] = useState([]);
 
@@ -36,7 +35,7 @@ const Reco = () => {
 
     // Cleanup: On retire l'écouteur quand le composant est démonté
     return () => {
-      off('cart:updated', handleCartUpdate);
+      emit('cart:updated', handleCartUpdate);
     };
   }, []);
 

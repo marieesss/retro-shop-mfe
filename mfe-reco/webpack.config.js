@@ -47,7 +47,7 @@ module.exports = {
       name: "mfe_reco", 
       filename: "remoteEntry.js",
       exposes: {
-        "./Reco": "./src/Reco.jsx", 
+        "./RecoApp": "./src/Reco",
       },
       shared: {
         react: {
