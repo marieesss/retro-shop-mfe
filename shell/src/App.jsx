@@ -3,7 +3,7 @@ import { on } from "../../shared/event";
 
 function safeLazy(importFn) {
   return lazy(() =>
-    importFn().catch(() => ({ default: () => null }))
+    importFn().catch(() => new Promise(() => {}))
   );
 }
 
