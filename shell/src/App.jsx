@@ -1,8 +1,15 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { on } from "../../shared/event";
-const ProductApp = lazy(() => import("mfe_product/ProductApp"));
-const CartApp = lazy(() => import("mfe_cart/CartApp"));
-const RecoApp = lazy(() => import("mfe_reco/RecoApp"));
+
+function safeLazy(importFn) {
+  return lazy(() =>
+    importFn().catch(() => ({ default: () => null }))
+  );
+}
+
+const ProductApp = safeLazy(() => import("mfe_product/ProductApp"));
+const CartApp = safeLazy(() => import("mfe_cart/CartApp"));
+const RecoApp = safeLazy(() => import("mfe_reco/RecoApp"));
 
 export default function App() {
   const [count, setCount] = useState(0);
