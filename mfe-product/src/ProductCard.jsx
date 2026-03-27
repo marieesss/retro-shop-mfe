@@ -12,7 +12,7 @@ export default function ProductCard({ product }) {
       image: product.image,
       platform: product.platform
     };
-
+    console.log(" Bouton cliqué ! Envoi du payload :", payload);
     emit("cart:add", payload);
   };
 
