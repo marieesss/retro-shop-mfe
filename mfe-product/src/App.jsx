@@ -8,7 +8,7 @@ export default function App() {
       
       {/* Titre de confirmation visuelle */}
       <h1 style={{ color: "#416788", textAlign: "center", marginBottom: "30px" }}>
-        Produits Retro - MFE Product (Port 3001)
+        Produits Retro - MFE Product
       </h1>
 
       {/* Grille de produits */}
