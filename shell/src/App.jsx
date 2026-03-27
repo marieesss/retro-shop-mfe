@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { on } from "../../shared/event";
+import "../../shared/styles.css";
 
 function safeLazy(importFn) {
   return lazy(() =>
@@ -34,7 +35,7 @@ export default function App() {
         }}
       >
         <h1>RetroShop</h1>
-        <div>Panier : {count}</div>
+        <button>Panier : {count}</button>
       </header>
 
       <div
